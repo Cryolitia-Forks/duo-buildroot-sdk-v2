@@ -302,7 +302,6 @@
 					"console=$consoledev,$baudrate $othbootargs;"
 
 	#define SD_BOOTM_COMMAND \
-				SET_BOOTARGS \
 				"echo Boot from SD ...;" \
 				"mmc dev 0 && fatload mmc 0 ${uImage_addr} boot.sd; " \
 				"if test $? -eq 0; then " \
@@ -326,24 +325,20 @@
         #if defined(CONFIG_CMD_BOOT_MODE_NAND)
             #define CONFIG_NANDBOOTCOMMAND \
                     "loadboot_nand ;" \
-                    SET_BOOTARGS \
                     "mw.l 4330058 1 1; md.l 4330058 1; mw.l 3000154 0 1;" \
                     UBOOT_VBOOT_BOOTM_COMMAND
         #else
             #define CONFIG_NANDBOOTCOMMAND \
-                    SET_BOOTARGS \
             	    "nand read ${uImage_addr} BOOT;" \
                     "mw.l 4330058 1 1; md.l 4330058 1; mw.l 3000154 0 1;" \
                     UBOOT_VBOOT_BOOTM_COMMAND
         #endif
 	#elif defined(CONFIG_SPI_FLASH)
 		#define CONFIG_NORBOOTCOMMAND \
-				SET_BOOTARGS \
 				"sf probe;sf read ${uImage_addr} ${BOOT_PART_OFFSET} ${BOOT_PART_SIZE};" \
 				UBOOT_VBOOT_BOOTM_COMMAND
 	#elif defined(CONFIG_EMMC_SUPPORT)
 		#define CONFIG_EMMCBOOTCOMMAND \
-				SET_BOOTARGS \
 				"mmc dev 0 ;"		\
 				"mmc read ${uImage_addr} ${BOOT_PART_OFFSET} ${BOOT_PART_SIZE} ;"		\
 				UBOOT_VBOOT_BOOTM_COMMAND
