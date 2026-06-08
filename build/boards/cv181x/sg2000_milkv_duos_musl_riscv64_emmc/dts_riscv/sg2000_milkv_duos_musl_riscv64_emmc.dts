@@ -42,9 +42,19 @@
 
 &spi3 {
 	status = "okay";
+	cs-gpios = <&portb 16 0>;
 
 	spidev@0 {
+		status = "disabled";
+    };
+
+	display@0{
+		compatible = "sitronix,st7796";
+		reg = <0>;
 		status = "okay";
+		spi-max-frequency = <5000000>;
+		dc-gpios = <&porta 19 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&porta 18 GPIO_ACTIVE_HIGH>;
 	};
 };
 
