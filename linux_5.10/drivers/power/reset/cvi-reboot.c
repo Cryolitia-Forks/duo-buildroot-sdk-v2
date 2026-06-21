@@ -51,6 +51,9 @@ static void cvi_do_pwroff(void)
 	void __iomem *REG_RTC_CTRL_BASE = base;
 	void __iomem *REG_RTC_BASE = base + 0x1000;
 
+	writel(0x2, REG_RTC_CTRL_BASE + 0xAC);
+	writel(0x3, REG_RTC_BASE + 0xD0);
+
 	/* Enable power suspend wakeup source mask */
 	writel(0x1, REG_RTC_BASE + 0x3C); // 1 = select prdata from 32K domain
 
